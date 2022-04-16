@@ -17,7 +17,7 @@
 
 #define DESCUENTO 0.1
 #define INTERES 0.25
-#define BITCOIN 4623262.00	// Precio Venta  segun  cronista.com (Bitso)  al  15/04/2022  21:49 hs
+#define BITCOIN 4631241.00	// Precio al  15/04/2022  22:20 hs
 
 int main(void) {
 
