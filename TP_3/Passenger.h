@@ -19,9 +19,9 @@ typedef struct
 	char nombre[50];
 	char apellido[50];
 	float precio;
-	int tipoPasajero;
 	char codigoVuelo[20];
 	int estadoVuelo;
+	int tipoPasajero;
 	//int isEmpty;
 
 }Passenger;

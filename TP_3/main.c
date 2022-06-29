@@ -179,7 +179,7 @@ int main()
 				{
 					if(!controller_saveAsText("data.csv",listaPasajeros))
 					{
-						flagTexto = 1;
+						//flagTexto = 1;
 						printf("\nEl archivo data.csv se guardo en modo texto\n");
 					}
 					else
@@ -204,7 +204,7 @@ int main()
 				{
 					if(!controller_saveAsBinary("data.bin",listaPasajeros))
 					{
-						flagBinario = 1;
+						//flagBinario = 1;
 						printf("\nEl archivo data.bin se guardo en modo binario\n");
 					}
 					else

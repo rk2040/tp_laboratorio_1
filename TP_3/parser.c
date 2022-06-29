@@ -23,8 +23,8 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger)
 	char nombre[50];
 	char apellido[50];
 	char precio[50];
-	char codigoVuelo[50];
 	char tipoPasaje[50];
+	char codigoVuelo[50];
 	char estadoVuelo[50];
 	int maxId = -1;
 	int cantidadElementos;
@@ -68,7 +68,7 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger)
 		}while(!feof(pFile));
 		//passenger_setPrimerId(maxId+1);
 
-		fclose(pFile);
+		//fclose(pFile);
 	}
 
 	return error;
@@ -95,12 +95,16 @@ int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger)
 		do
 		{
 			nuevoPasajero = Passenger_new();
-			cant = fread(nuevoPasajero, sizeof(Passenger),1,pFile);
 
-			if(nuevoPasajero != NULL && cant == 1)
+			if(nuevoPasajero != NULL)
 			{
-				ll_add(pArrayListPassenger, nuevoPasajero);
-				error = 0;
+				cant = fread(nuevoPasajero, sizeof(Passenger),1,pFile);
+				if(cant == 1)
+				{
+					ll_add(pArrayListPassenger, nuevoPasajero);
+					error = 0;
+					nuevoPasajero = NULL;
+				}
 			}
 			else
 			{
@@ -110,6 +114,6 @@ int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger)
 		}while(!feof(pFile));
 
 	}
-	  fclose(pFile);
+	  //fclose(pFile);
 	return error;
 }

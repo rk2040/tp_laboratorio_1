@@ -46,8 +46,8 @@ Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoS
 		Passenger_setNombre(nuevoPasajero, nombreStr);
 		Passenger_setApellido(nuevoPasajero, apellidoStr);
 		Passenger_setPrecio(nuevoPasajero, atof(precioStr));
-		Passenger_setTipoPasajero(nuevoPasajero, tipoPasaje);
 		Passenger_setCodigoVuelo(nuevoPasajero, codigoVueloStr);
+		Passenger_setTipoPasajero(nuevoPasajero, tipoPasaje);
 		Passenger_setEstadoVuelo(nuevoPasajero, estadoVuelo);
 
 	}
@@ -67,8 +67,8 @@ Passenger* Passenger_newParametrosInt(int id, char* nombre, char* apellido, floa
                 Passenger_setNombre(nuevoPasajero, nombre) == 1 ||
                 Passenger_setApellido(nuevoPasajero, apellido) == 1 ||
 				Passenger_setPrecio(nuevoPasajero, precio) == 1 ||
-				Passenger_setTipoPasajero(nuevoPasajero, tipoPasajero) == 1 ||
 				Passenger_setCodigoVuelo(nuevoPasajero, codigoVuelo) == 1 ||
+				Passenger_setTipoPasajero(nuevoPasajero, tipoPasajero) == 1 ||
 				Passenger_setEstadoVuelo(nuevoPasajero, estadoVuelo) == 1	)
         {
             Passenger_delete(nuevoPasajero);
@@ -417,8 +417,8 @@ int mostrarPasajero(Passenger* pasajero)
         		!Passenger_getNombre(pasajero, nombre) &&
 				!Passenger_getApellido(pasajero, apellido) &&
 				!Passenger_getPrecio(pasajero, &precio) &&
-                !Passenger_getTipoPasajero(pasajero, &tipoPasaje) &&
 				!Passenger_getCodigoVuelo(pasajero, codigoVuelo) &&
+                !Passenger_getTipoPasajero(pasajero, &tipoPasaje) &&
 				!Passenger_getEstadoVuelo(pasajero, &estadoVuelo) 	)
         {
         	cargarTipoPasaje(tipoPasaje, descTipo);
@@ -429,8 +429,8 @@ int mostrarPasajero(Passenger* pasajero)
 			printf("  Nombre  	: %s\n", nombre);
 			printf("  Apellido	: %s\n", apellido);
 			printf("  Precio	: %.2f\n", precio);
-			printf("  Cod. vuelo	: %s\n", codigoVuelo);
 			printf("  Tipo pass	: %s\n", descTipo);
+			printf("  Cod. vuelo	: %s\n", codigoVuelo);
 			printf("  Est. Vuelo	: %s\n", descEstado);
 			printf("\n");
 

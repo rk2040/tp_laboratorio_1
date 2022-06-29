@@ -58,8 +58,9 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 	{
 		f = fopen(path,"rb");
 
-		if(f != NULL && !parser_PassengerFromBinary(f, pArrayListPassenger))
+		if(f != NULL )
 		{
+			parser_PassengerFromBinary(f, pArrayListPassenger);
 			retorno = 0;
 		}
 
@@ -100,14 +101,26 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 		id = id +1;									// y le sumo 1 al id del nuevo elemento
 
 		pedirCadena(nombre, "Ingrese nombre del pasajero: ", 50);
+		while(strlen(nombre)<=0)
+		{
+			pedirCadena(nombre, "Ingrese nombre del pasajero: ", 50);
+		}
 		formatoInicialMayuscula(nombre);
 
 		pedirCadena(apellido, "Ingrese apellido del pasajero: ", 50);
+		while(strlen(apellido)<=0)
+			{
+				pedirCadena(apellido, "Ingrese apellido del pasajero: ", 50);
+			}
 		formatoInicialMayuscula(apellido);
 
 		validarFloat(&precio, "Ingrese Precio de vuelo: ", "Error. Ingrese Precio de vuelo nuevamente: ", 0, 999999999, 4);
 
 		pedirAlfaNumerico(codigoVuelo, "Ingrese Codigo de Vuelo: (XX111)", 20);
+		while(strlen(codigoVuelo)<=0)
+				{
+				pedirAlfaNumerico(codigoVuelo, "Ingrese Codigo de Vuelo: (XX111)", 20);
+				}
 		strcpy(codigoVuelo,strupr(codigoVuelo));
 
 		validarEntero(&tipoPasajero, "Ingrese tipo de pasaje:\n1- FirstClass\n2- ExecutiveClass\n3- EconomyClass", "Error. Ingrese tipo de pasaje nuevamente: ", 1, 3, 4);
@@ -120,6 +133,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 
 		if( !Passenger_setId(nuevoPasajero, id) &&
 			!Passenger_setNombre(nuevoPasajero, nombre) &&
+			!Passenger_setApellido(nuevoPasajero, apellido) &&
 			!Passenger_setPrecio(nuevoPasajero, precio) &&
 			!Passenger_setCodigoVuelo(nuevoPasajero, codigoVuelo) &&
 			!Passenger_setTipoPasajero(nuevoPasajero, tipoPasajero) &&
@@ -524,8 +538,8 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
                 		!Passenger_getNombre(auxPasajero,nombre) &&
                         !Passenger_getApellido(auxPasajero, apellido) &&
                         !Passenger_getPrecio(auxPasajero, &precio) &&
-						!Passenger_getTipoPasajero(auxPasajero, &tipoPasajero) &&
 						!Passenger_getCodigoVuelo(auxPasajero, codigoVuelo) &&
+						!Passenger_getTipoPasajero(auxPasajero, &tipoPasajero) &&
 						!Passenger_getEstadoVuelo(auxPasajero, &estadoVuelo) )
                 {
                 	cargarTipoPasaje(tipoPasajero, descTipoPasajero);
@@ -569,6 +583,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
             for(int i = 0; i<tamanio; i++)
             {
             	auxpasajero = ll_get(pArrayListPassenger,i);
+            	fwrite(auxpasajero, sizeof(Passenger), 1,f);
 
                 if(auxpasajero != NULL)
                 {
