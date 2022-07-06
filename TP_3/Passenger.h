@@ -19,16 +19,16 @@ typedef struct
 	char nombre[50];
 	char apellido[50];
 	float precio;
+	int tipoPasajero;
 	char codigoVuelo[20];
 	int estadoVuelo;
-	int tipoPasajero;
 	//int isEmpty;
 
 }Passenger;
 
 Passenger* Passenger_new();
-Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoStr, char* precioStr, char* codigoVueloStr, char* tipoPasajeroStr, char* estadoVueloStr);
-Passenger* Passenger_newParametrosInt(int id, char* nombre, char* apellido, float precio, char* codigoVuelo, int tipoPasajero, int estadoVuelo);
+Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoStr, char* precioStr, char* tipoPasajeroStr, char* codigoVueloStr, char* estadoVueloStr);
+Passenger* Passenger_newParametrosInt(int id, char* nombre, char* apellido, float precio, int tipoPasajero, char* codigoVuelo, int estadoVuelo);
 void Passenger_delete(Passenger* this);
 
 //----------

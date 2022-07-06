@@ -21,15 +21,15 @@ Passenger* Passenger_new()
 		strcpy(nuevoPasajero->nombre, "");
 		strcpy(nuevoPasajero->apellido, "");
 		nuevoPasajero->precio = 0;
-		strcpy(nuevoPasajero->codigoVuelo, "");
 		nuevoPasajero->tipoPasajero = 0;
+		strcpy(nuevoPasajero->codigoVuelo, "");
 		nuevoPasajero->estadoVuelo = 0;
 	}
 
     return nuevoPasajero;
 }
 
-Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoStr, char* precioStr, char* codigoVueloStr, char* tipoPasajeroStr, char* estadoVueloStr)
+Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoStr, char* precioStr, char* tipoPasajeroStr, char* codigoVueloStr, char* estadoVueloStr)
 {
 	Passenger* nuevoPasajero;
 	nuevoPasajero = NULL;
@@ -46,8 +46,8 @@ Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoS
 		Passenger_setNombre(nuevoPasajero, nombreStr);
 		Passenger_setApellido(nuevoPasajero, apellidoStr);
 		Passenger_setPrecio(nuevoPasajero, atof(precioStr));
-		Passenger_setCodigoVuelo(nuevoPasajero, codigoVueloStr);
 		Passenger_setTipoPasajero(nuevoPasajero, tipoPasaje);
+		Passenger_setCodigoVuelo(nuevoPasajero, codigoVueloStr);
 		Passenger_setEstadoVuelo(nuevoPasajero, estadoVuelo);
 
 	}
@@ -55,7 +55,7 @@ Passenger* Passenger_newParametros(char* idStr, char* nombreStr, char* apellidoS
     return nuevoPasajero;
 }
 
-Passenger* Passenger_newParametrosInt(int id, char* nombre, char* apellido, float precio, char* codigoVuelo, int tipoPasajero, int estadoVuelo)
+Passenger* Passenger_newParametrosInt(int id, char* nombre, char* apellido, float precio, int tipoPasajero, char* codigoVuelo, int estadoVuelo)
 {
 	Passenger* nuevoPasajero;
 	nuevoPasajero = NULL;
@@ -63,13 +63,13 @@ Passenger* Passenger_newParametrosInt(int id, char* nombre, char* apellido, floa
 
     if(nuevoPasajero != NULL)
     {
-        if(		Passenger_setId(nuevoPasajero, id) == 1 ||
-                Passenger_setNombre(nuevoPasajero, nombre) == 1 ||
-                Passenger_setApellido(nuevoPasajero, apellido) == 1 ||
-				Passenger_setPrecio(nuevoPasajero, precio) == 1 ||
-				Passenger_setCodigoVuelo(nuevoPasajero, codigoVuelo) == 1 ||
-				Passenger_setTipoPasajero(nuevoPasajero, tipoPasajero) == 1 ||
-				Passenger_setEstadoVuelo(nuevoPasajero, estadoVuelo) == 1	)
+        if(		Passenger_setId(nuevoPasajero, id)  ||
+                Passenger_setNombre(nuevoPasajero, nombre)  ||
+                Passenger_setApellido(nuevoPasajero, apellido)  ||
+				Passenger_setPrecio(nuevoPasajero, precio)  ||
+				Passenger_setCodigoVuelo(nuevoPasajero, codigoVuelo)  ||
+				Passenger_setTipoPasajero(nuevoPasajero, tipoPasajero)  ||
+				Passenger_setEstadoVuelo(nuevoPasajero, estadoVuelo) 	)
         {
             Passenger_delete(nuevoPasajero);
         }

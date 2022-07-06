@@ -999,5 +999,3 @@ id,nombre,apellido,precio,descTipoPasaje,codigoVuelo,descEstadoVuelo
 998,Jaye,Gutierrez,25000,EconomyClass,MM0987B,En Horario
 999,Tamarra,Navarro,15000,EconomyClass,MM0987B,En Horario
 1000,Saleem,Torres,20000,EconomyClass,MM0987B,En Horario
-1001,Leila,Nahir,134000,FirstClass,JP2145,En Vuelo
-1002,Roberto,Pardo,123000,EconomyClass,JP6789,Aterrizado

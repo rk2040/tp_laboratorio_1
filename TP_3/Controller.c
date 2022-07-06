@@ -77,7 +77,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
  * \return int
  *
  */
-int controller_addPassenger(LinkedList* pArrayListPassenger)
+int controller_addPassenger(LinkedList* pArrayListPassenger, int* pNextId)
 {
     int error = -1;
     int id;
@@ -93,12 +93,14 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
     Passenger* nuevoPasajero;
     nuevoPasajero = NULL;
 
+    id = *pNextId;
+
     if(pArrayListPassenger != NULL)
     {
     	nuevoPasajero = Passenger_new();
     	//id = passenger_generarId();
-		id = buscarMayorId(pArrayListPassenger);	// Busco el ultimo id de la lista
-		id = id +1;									// y le sumo 1 al id del nuevo elemento
+		//id = buscarMayorId(pArrayListPassenger);	// Busco el ultimo id de la lista
+		//id = id +1;									// y le sumo 1 al id del nuevo elemento
 
 		pedirCadena(nombre, "Ingrese nombre del pasajero: ", 50);
 		while(strlen(nombre)<=0)
@@ -114,14 +116,19 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 			}
 		formatoInicialMayuscula(apellido);
 
-		validarFloat(&precio, "Ingrese Precio de vuelo: ", "Error. Ingrese Precio de vuelo nuevamente: ", 0, 999999999, 4);
+		validarFloat(&precio, "Ingrese Precio de vuelo: ", "Error. Ingrese Precio de vuelo nuevamente: ", 0, 999999999, 1);
+		while(precio < 0)
+		{
+			validarFloat(&precio, "Ingrese Precio de vuelo: ", "Error. Ingrese Precio de vuelo nuevamente: ", 0, 999999999, 1);
+		}
 
 		pedirAlfaNumerico(codigoVuelo, "Ingrese Codigo de Vuelo: (XX111)", 20);
 		while(strlen(codigoVuelo)<=0)
-				{
-				pedirAlfaNumerico(codigoVuelo, "Ingrese Codigo de Vuelo: (XX111)", 20);
-				}
+		{
+			pedirAlfaNumerico(codigoVuelo, "Ingrese Codigo de Vuelo: (XX111)", 20);
+		}
 		strcpy(codigoVuelo,strupr(codigoVuelo));
+
 
 		validarEntero(&tipoPasajero, "Ingrese tipo de pasaje:\n1- FirstClass\n2- ExecutiveClass\n3- EconomyClass", "Error. Ingrese tipo de pasaje nuevamente: ", 1, 3, 4);
 
@@ -142,6 +149,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger)
 		{
 			ll_add(pArrayListPassenger,nuevoPasajero);
 			printf("Pasajero cargado exitosamente.\n");
+			(*pNextId) = id + 1;
 		}
 		else
 		{
@@ -269,7 +277,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger)
 							validarEntero(&estadoVuelo, "Ingrese estado de vuelo:\n1- Aterrizado\n2- En Vuelo\n3- En Horario\n4- Demorado", "Error. Ingrese tipo de pasaje nuevamente: ", 1, 4, 4);
 							//auxPasajero->estadoVuelo = estadoVuelo;
 							//cargarEstadoVuelo(auxPasajero, descEstadoVuelo);
-							if( !Passenger_setCodigoVuelo(auxPasajero, codigoVuelo))
+							if( !Passenger_setEstadoVuelo(auxPasajero, estadoVuelo))
 							{
 								printf("El estado de vuelo se modifico exitosamente\n");
 								ll_set(pArrayListPassenger, indice, auxPasajero);
@@ -362,8 +370,8 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
     int error = 1;
     int flag = 1;
     int tam;
-    char descTipoPass[20];
-    char descEstadoVuelo[20];
+    //char descTipoPass[20];
+    //char descEstadoVuelo[20];
     Passenger* auxPasajero;
 
     if(pArrayListPassenger != NULL)
@@ -380,11 +388,8 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger)
             {
             	auxPasajero = (Passenger*)ll_get(pArrayListPassenger, i);
             	mostrarPasajeroLinea(auxPasajero);
-            	cargarTipoPasaje(auxPasajero->tipoPasajero, descTipoPass);
-            	cargarEstadoVuelo(auxPasajero->estadoVuelo, descEstadoVuelo);
-
-            	//printf(" %4d %12s %12s % 10.2f 	%10s %15s 	%10s\n",
-            		//	auxPasajero->id, auxPasajero->nombre, auxPasajero->apellido, auxPasajero->precio, auxPasajero->codigoVuelo, descTipoPass, descEstadoVuelo);
+            	//cargarTipoPasaje(auxPasajero->tipoPasajero, descTipoPass);
+            	//cargarEstadoVuelo(auxPasajero->estadoVuelo, descEstadoVuelo);
 
                 flag = 0;
             }
@@ -583,7 +588,6 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
             for(int i = 0; i<tamanio; i++)
             {
             	auxpasajero = ll_get(pArrayListPassenger,i);
-            	fwrite(auxpasajero, sizeof(Passenger), 1,f);
 
                 if(auxpasajero != NULL)
                 {

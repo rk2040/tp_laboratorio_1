@@ -24,7 +24,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger);
  * @param  pArrayListPassenger punteroa la lista de pasajeros
  * @return 0 si salio ok -1 si hubo error
  */
-int controller_addPassenger(LinkedList* pArrayListPassenger);
+int controller_addPassenger(LinkedList* pArrayListPassenger, int* pNextId);
 
 /**
  * @brief Realiza  la modificacion de un pasajero de la lista solicitando el id como referencia
